@@ -15,10 +15,12 @@
 package tao_hello
 
 import (
+	"github.com/stretchr/testify/assert"
 	"github.com/taouniverse/tao"
 	"testing"
 )
 
 func TestTao(t *testing.T) {
-	tao.Run(nil, nil)
+	err := tao.Run(nil, nil)
+	assert.Nil(t, err)
 }

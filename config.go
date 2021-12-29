@@ -53,6 +53,13 @@ func (h *HelloConfig) ToTask() tao.Task {
 	return tao.NewTask(
 		"hello",
 		func(ctx context.Context, param tao.Parameter) (tao.Parameter, error) {
+			// non-block check
+			select {
+			case <-ctx.Done():
+				return param, tao.NewError(tao.ContextCanceled, "hello: context has been canceled")
+			default:
+			}
+			// print times
 			for i := 0; i < h.Times; i++ {
 				fmt.Println(h.Print)
 			}
