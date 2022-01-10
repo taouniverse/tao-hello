@@ -51,12 +51,12 @@ func (h *HelloConfig) ValidSelf() {
 // ToTask transform itself to Task
 func (h *HelloConfig) ToTask() tao.Task {
 	return tao.NewTask(
-		"hello",
+		ConfigKey,
 		func(ctx context.Context, param tao.Parameter) (tao.Parameter, error) {
 			// non-block check
 			select {
 			case <-ctx.Done():
-				return param, tao.NewError(tao.ContextCanceled, "hello: context has been canceled")
+				return param, tao.NewError(tao.ContextCanceled, "%s: context has been canceled", ConfigKey)
 			default:
 			}
 			// print times
