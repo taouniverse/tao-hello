@@ -21,6 +21,10 @@ import (
 )
 
 func TestTao(t *testing.T) {
+	tao.DevelopMode()
+
+	assert.Equal(t, h, defaultHello)
+
 	err := tao.Run(nil, nil)
 	assert.Nil(t, err)
 }

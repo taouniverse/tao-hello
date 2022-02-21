@@ -22,20 +22,24 @@ import (
 /**
 import _ "github.com/taouniverse/tao_hello"
 */
+
+var h = new(HelloConfig)
+
 func init() {
-	// 1. transfer config bytes to object
-	h := new(HelloConfig)
-	bytes, err := tao.GetConfigBytes(ConfigKey)
-	if err != nil {
-		h = h.Default().(*HelloConfig)
-	} else {
-		err = json.Unmarshal(bytes, &h)
+	err := tao.Register(ConfigKey, func() error {
+		// 1. transfer config bytes to object
+		bytes, err := tao.GetConfigBytes(ConfigKey)
 		if err != nil {
-			panic(err)
+			h = h.Default().(*HelloConfig)
+		} else {
+			err = json.Unmarshal(bytes, &h)
+			if err != nil {
+				return err
+			}
 		}
-	}
-	// 2. set object to tao
-	err = tao.SetConfig(ConfigKey, h)
+		// 2. set object to tao
+		return tao.SetConfig(ConfigKey, h)
+	})
 	if err != nil {
 		panic(err)
 	}
