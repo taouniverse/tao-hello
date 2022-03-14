@@ -23,6 +23,7 @@ import (
 import _ "github.com/taouniverse/tao-hello"
 */
 
+// H config of hello
 var H = new(Config)
 
 func init() {
