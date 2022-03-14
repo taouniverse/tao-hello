@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package tao_hello
+package hello
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -23,7 +23,7 @@ import (
 func TestTao(t *testing.T) {
 	tao.DevelopMode()
 
-	assert.Equal(t, h, defaultHello)
+	assert.Equal(t, H, defaultHello)
 
 	err := tao.Run(nil, nil)
 	assert.Nil(t, err)

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package tao_hello
+package hello
 
 import (
 	"encoding/json"
@@ -20,27 +20,27 @@ import (
 )
 
 /**
-import _ "github.com/taouniverse/tao_hello"
+import _ "github.com/taouniverse/tao-hello"
 */
 
-var h = new(HelloConfig)
+var H = new(Config)
 
 func init() {
 	err := tao.Register(ConfigKey, func() error {
 		// 1. transfer config bytes to object
 		bytes, err := tao.GetConfigBytes(ConfigKey)
 		if err != nil {
-			h = h.Default().(*HelloConfig)
+			H = H.Default().(*Config)
 		} else {
-			err = json.Unmarshal(bytes, &h)
+			err = json.Unmarshal(bytes, &H)
 			if err != nil {
 				return err
 			}
 		}
 		// 2. set object to tao
-		return tao.SetConfig(ConfigKey, h)
+		return tao.SetConfig(ConfigKey, H)
 	})
 	if err != nil {
-		panic(err)
+		panic(err.Error())
 	}
 }
