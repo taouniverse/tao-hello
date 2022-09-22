@@ -44,9 +44,9 @@ U|  _  |u | |___  \| |/__ \| |/__.-,_| |_| |      /| |\   / ___ \.-,_| |_| |
 	RunAfters: []string{},
 }
 
-// Default config
-func (h *Config) Default() tao.Config {
-	return defaultHello
+// Name of Config
+func (h *Config) Name() string {
+	return ConfigKey
 }
 
 // ValidSelf with some default values

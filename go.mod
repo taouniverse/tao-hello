@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/stretchr/testify v1.7.0
-	github.com/taouniverse/tao v0.1.3
+	github.com/taouniverse/tao v0.1.5
 )
 
 require (
@@ -12,6 +12,3 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
-
-// 在goproxy.cn缓存了错误的版本
-retract v0.0.1

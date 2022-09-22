@@ -14,10 +14,7 @@
 
 package hello
 
-import (
-	"encoding/json"
-	"github.com/taouniverse/tao"
-)
+import "github.com/taouniverse/tao"
 
 /**
 import _ "github.com/taouniverse/tao-hello"
@@ -27,21 +24,14 @@ import _ "github.com/taouniverse/tao-hello"
 var H = new(Config)
 
 func init() {
-	err := tao.Register(ConfigKey, func() error {
-		// 1. transfer config bytes to object
-		bytes, err := tao.GetConfigBytes(ConfigKey)
-		if err != nil {
-			H = H.Default().(*Config)
-		} else {
-			err = json.Unmarshal(bytes, &H)
-			if err != nil {
-				return err
-			}
-		}
-		// 2. set object to tao
-		return tao.SetConfig(ConfigKey, H)
-	})
+	err := tao.Register(ConfigKey, H, setup)
 	if err != nil {
 		panic(err.Error())
 	}
+}
+
+// setup with hello config
+// execute when init tao universe
+func setup() error {
+	return nil
 }

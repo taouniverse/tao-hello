@@ -1,4 +1,4 @@
-// Copyright 2021
+// Copyright 2022 huija
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,14 +16,16 @@ package hello
 
 import (
 	"github.com/stretchr/testify/assert"
+	"github.com/taouniverse/tao"
 	"testing"
 )
 
-func TestConfig(t *testing.T) {
-	h := new(Config)
-	h.ValidSelf()
-	assert.EqualValues(t, h, defaultHello)
+func TestTao(t *testing.T) {
+	err := tao.DevelopMode()
+	assert.Nil(t, err)
 
-	t.Log(h.RunAfter())
-	t.Log(h.ToTask())
+	assert.Equal(t, H, defaultHello)
+
+	err = tao.Run(nil, nil)
+	assert.Nil(t, err)
 }
