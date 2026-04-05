@@ -14,24 +14,27 @@
 
 package hello
 
-import "github.com/taouniverse/tao"
+import (
+	"github.com/taouniverse/tao"
+)
 
 /**
 import _ "github.com/taouniverse/tao-hello"
 */
 
-// H config of hello
-var H = new(Config)
+var H = &Config{}
+
+var Factory *tao.BaseFactory[struct{}]
 
 func init() {
-	err := tao.Register(ConfigKey, H, setup)
+	var err error
+	Factory, err = tao.Register(ConfigKey, H, NewHello)
 	if err != nil {
 		panic(err.Error())
 	}
 }
 
-// setup with hello config
-// execute when init tao universe
-func setup() error {
-	return nil
+func NewHello(name string, config InstanceConfig) (struct{}, func() error, error) {
+	closer := func() error { return nil }
+	return struct{}{}, closer, nil
 }

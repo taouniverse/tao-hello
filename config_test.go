@@ -15,15 +15,34 @@
 package hello
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/taouniverse/tao"
 )
 
 func TestConfig(t *testing.T) {
-	h := new(Config)
+	h := &Config{
+		BaseMultiConfig: tao.BaseMultiConfig[InstanceConfig]{
+			Instances: map[string]InstanceConfig{
+				tao.DefaultInstanceKey: {},
+			},
+		},
+	}
 	h.ValidSelf()
-	assert.EqualValues(t, h, defaultHello)
+
+	instance := h.Instances[tao.DefaultInstanceKey]
+	assert.Equal(t, defaultInstance.Print, instance.Print)
+	assert.Equal(t, defaultInstance.Times, instance.Times)
 
 	t.Log(h.RunAfter())
 	t.Log(h.ToTask())
+}
+
+func TestConfigDefaultInstanceName(t *testing.T) {
+	c := &Config{}
+	assert.Equal(t, "default", c.GetDefaultInstanceName())
+
+	c.Default = "master"
+	assert.Equal(t, "master", c.GetDefaultInstanceName())
 }
