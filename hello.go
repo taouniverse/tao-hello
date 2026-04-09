@@ -22,8 +22,10 @@ import (
 import _ "github.com/taouniverse/tao-hello"
 */
 
+// H is the global config instance for tao-hello
 var H = &Config{}
 
+// Factory is the global factory instance
 var Factory *tao.BaseFactory[struct{}]
 
 func init() {
@@ -34,6 +36,7 @@ func init() {
 	}
 }
 
+// NewHello creates a new Hello instance for factory pattern
 func NewHello(name string, config InstanceConfig) (struct{}, func() error, error) {
 	closer := func() error { return nil }
 	return struct{}{}, closer, nil

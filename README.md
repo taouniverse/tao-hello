@@ -1,5 +1,8 @@
 # tao-hello
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/taouniverse/tao-hello)](https://goreportcard.com/report/github.com/taouniverse/tao-hello)
+[![GoDoc](https://pkg.go.dev/badge/github.com/taouniverse/tao-hello?status.svg)](https://pkg.go.dev/github.com/taouniverse/tao-hello?tab=doc)
+
 ```
   _   _  U _____ u  _       _       U  ___ u      _____      _      U  ___ u 
  |'| |'| \| ___"|/ |"|     |"|       \/"_ \/     |_ " _| U  /"\  u   \/"_ \/ 
