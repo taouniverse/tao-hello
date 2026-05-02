@@ -56,14 +56,14 @@ func (h *Config) Name() string {
 
 // ValidSelf with some default values
 func (h *Config) ValidSelf() {
-	for name, instance := range h.Instances {
-		if instance.Times == 0 {
-			instance.Times = defaultInstance.Times
+	for i := range h.Instances {
+		inst := &h.Instances[i].Cfg
+		if inst.Times == 0 {
+			inst.Times = defaultInstance.Times
 		}
-		if instance.Print == "" {
-			instance.Print = defaultInstance.Print
+		if inst.Print == "" {
+			inst.Print = defaultInstance.Print
 		}
-		h.Instances[name] = instance
 	}
 	if h.RunAfters == nil {
 		h.RunAfters = []string{}
@@ -80,9 +80,9 @@ func (h *Config) ToTask() tao.Task {
 				return param, tao.NewError(tao.ContextCanceled, "%s: context has been canceled", ConfigKey)
 			default:
 			}
-			for _, instance := range h.Instances {
-				for i := 0; i < instance.Times; i++ {
-					fmt.Println(instance.Print)
+			for _, inst := range h.Instances {
+				for i := 0; i < inst.Cfg.Times; i++ {
+					fmt.Println(inst.Cfg.Print)
 				}
 			}
 			return param, nil

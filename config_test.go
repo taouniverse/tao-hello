@@ -24,14 +24,15 @@ import (
 func TestConfig(t *testing.T) {
 	h := &Config{
 		BaseMultiConfig: tao.BaseMultiConfig[InstanceConfig]{
-			Instances: map[string]InstanceConfig{
-				tao.DefaultInstanceKey: {},
+			Instances: []tao.Instance[InstanceConfig]{
+				{Name: tao.DefaultInstanceKey, Cfg: InstanceConfig{}},
 			},
 		},
 	}
 	h.ValidSelf()
 
-	instance := h.Instances[tao.DefaultInstanceKey]
+	instance, ok := h.GetInstanceByName(tao.DefaultInstanceKey)
+	assert.True(t, ok)
 	assert.Equal(t, defaultInstance.Print, instance.Print)
 	assert.Equal(t, defaultInstance.Times, instance.Times)
 
